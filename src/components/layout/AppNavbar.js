@@ -7,7 +7,7 @@ import { firebaseConnect } from "react-redux-firebase";
 
 class AppNavbar extends Component {
   state = {
-    isAuthenticated: false
+    isAuthenticated: false,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -20,7 +20,7 @@ class AppNavbar extends Component {
     }
   }
 
-  onLogoutClick = e => {
+  onLogoutClick = (e) => {
     e.preventDefault();
 
     const { firebase } = this.props;
@@ -57,9 +57,9 @@ class AppNavbar extends Component {
             {isAuthenticated ? (
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a href="#!" className="nav-link">
+                  <Link to="/" className="nav-link">
                     {auth.email}
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/settings" className="nav-link">
@@ -101,13 +101,13 @@ class AppNavbar extends Component {
 AppNavbar.propTypes = {
   firebase: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired
+  settings: PropTypes.object.isRequired,
 };
 
 export default compose(
   firebaseConnect(),
   connect((state, props) => ({
     auth: state.firebase.auth,
-    settings: state.settings
+    settings: state.settings,
   }))
 )(AppNavbar);

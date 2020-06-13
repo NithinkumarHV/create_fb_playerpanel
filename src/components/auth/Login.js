@@ -31,8 +31,8 @@ class Login extends Component {
   render() {
     const { message, messageType } = this.props.notify;
     return (
-      <div className="row">
-        <div className="col-md-6 mx-auto">
+      <div className="row justify-content-left" style={{opacity:"0.6"}}>
+        <div className="col-md-6 align-self-left">
           <div className="card">
             <div className="card-body">
               {message ? (

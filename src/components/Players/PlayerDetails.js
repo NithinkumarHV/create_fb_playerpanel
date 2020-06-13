@@ -75,7 +75,7 @@ class PlayerDetails extends Component {
 
     if (player) {
       return (
-        <div>
+        <div style={{backgroundColor:"white",opacity:"0.8",padding:"10px",border:"10px white"}}>
           <div className="row">
             <div className="col-md-6">
               <Link to="/" className="btn btn-link">
@@ -97,8 +97,8 @@ class PlayerDetails extends Component {
             </div>
           </div>
           <hr />
-          <div className="card">
-            <h3 className="card-header">
+          <div className="card" >
+            <h3 className="card-header" >
               {player.firstName} {player.lastName}
             </h3>
             <div className="card-body">

@@ -43,7 +43,7 @@ class EditPlayer extends Component {
 
     if (player) {
       return (
-        <div>
+        <div style={{backgroundColor:"white",opacity:"0.6",padding:"10px",border:"10px white"}}>
           <div className="row">
             <div className="col-md-6">
               <Link to="/" className="btn btn-link">

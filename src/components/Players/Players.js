@@ -30,8 +30,8 @@ class Players extends Component {
     const { totalslamsWon } = this.state;
     if (players) {
       return (
-        <div>
-          <div className="row">
+        <div style={{backgroundColor:"white",opacity:"0.5",padding:"10px",border:"2px black"}}>
+          <div className="row" >
             <div className="col-md-6">
               <h2>
                 {" "}
