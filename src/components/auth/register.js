@@ -9,7 +9,7 @@ import Alert from "../layout/Alert";
 class register extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
 
   componentWillMount() {
@@ -20,7 +20,7 @@ class register extends Component {
     }
   }
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { firebase, notifyUser } = this.props;
@@ -29,23 +29,26 @@ class register extends Component {
     // Register with firebase
     firebase
       .createUser({ email, password })
-      .catch(err => notifyUser("That User Already Exists", "error"));
+      .catch((err) => notifyUser("That User Already Exists", "error"));
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     const { message, messageType } = this.props.notify;
     return (
-      <div className="row justify-content-left" style={{opacity:"0.6"}}>
+      <div className="row justify-content-left" style={{ opacity: "0.6" }}>
         <div className="col-md-6 align-self-left">
-          <div className="card">
+          <div
+            className="card"
+            style={{ backgroundColor: "black", color: "white" }}
+          >
             <div className="card-body">
               {message ? (
                 <Alert message={message} messageType={messageType} />
               ) : null}
               <h1 className="text-center pb-4 pt-3">
-                <span className="text-primary">
+                <span>
                   <i className="fas fa-lock" /> Register
                 </span>
               </h1>
@@ -75,7 +78,7 @@ class register extends Component {
                 <input
                   type="submit"
                   value="Register"
-                  className="btn btn-primary btn-block"
+                  className="btn btn-success btn"
                 />
               </form>
             </div>
@@ -89,7 +92,7 @@ class register extends Component {
 register.propTypes = {
   firebase: PropTypes.object.isRequired,
   notify: PropTypes.object.isRequired,
-  notifyUser: PropTypes.func.isRequired
+  notifyUser: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -97,7 +100,7 @@ export default compose(
   connect(
     (state, props) => ({
       notify: state.notify,
-      settings: state.settings
+      settings: state.settings,
     }),
     { notifyUser }
   )

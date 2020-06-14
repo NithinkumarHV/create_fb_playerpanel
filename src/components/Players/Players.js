@@ -8,7 +8,7 @@ import Spinner from "../layout/Spinner";
 
 class Players extends Component {
   state = {
-    totalslamsWon: null
+    totalslamsWon: null,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -27,36 +27,47 @@ class Players extends Component {
   }
   render() {
     const { players } = this.props;
-    const { totalslamsWon } = this.state;
+    // const { totalslamsWon } = this.state;
     if (players) {
       return (
-        <div style={{backgroundColor:"white",opacity:"0.5",padding:"10px",border:"2px black"}}>
-          <div className="row" >
-            <div className="col-md-6">
+        <div
+          className="container-fluid"
+          style={{
+            backgroundColor: "white",
+            opacity: "0.8",
+            padding: "10px",
+            border: "2px black",
+          }}
+        >
+          <div className="row">
+            <div className="col-md-12">
               <h2>
                 {" "}
                 <i className="fas fa-users" /> Players{" "}
               </h2>
             </div>
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <h5 className="text-right text-secondary">
                 Total Slams Won{" "}
                 <span className="text-primary">#{parseInt(totalslamsWon)}</span>
               </h5>
-            </div>
+            </div> */}
           </div>
 
-          <table className="table table-striped">
+          <table
+            className="table table-hover table-responsive-xl text-center table-dark"
+            style={{ fontSize: "20px", color: "#edf1fe" }}
+          >
             <thead className="thead-inverse">
               <tr>
                 <th>Name</th>
                 <th>Country</th>
+                <th>Details</th>
                 <th>SlamsWon</th>
-                <th />
               </tr>
             </thead>
             <tbody>
-              {players.map(player => (
+              {players.map((player) => (
                 <tr key={player.id}>
                   <td>
                     <h5>
@@ -68,7 +79,6 @@ class Players extends Component {
                   <td>
                     <h6>{player.country}</h6>
                   </td>
-                  <td>{player.slamsWon}</td>
                   <td>
                     <Link
                       to={`/players/${player.id}`}
@@ -77,6 +87,7 @@ class Players extends Component {
                       <i className="fas fa-arrow-circle-right" /> Details
                     </Link>
                   </td>
+                  <td>{player.slamsWon}</td>
                 </tr>
               ))}
             </tbody>
@@ -91,12 +102,12 @@ class Players extends Component {
 
 Players.propTypes = {
   firestore: PropTypes.object.isRequired,
-  players: PropTypes.array
+  players: PropTypes.array,
 };
 
 export default compose(
   firestoreConnect([{ collection: "players" }]),
   connect((state, props) => ({
-    players: state.firestore.ordered.players
+    players: state.firestore.ordered.players,
   }))
 )(Players);

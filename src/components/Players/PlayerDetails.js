@@ -10,18 +10,18 @@ import classnames from "classnames";
 class PlayerDetails extends Component {
   state = {
     showRankingUpdate: false,
-    RankingUpdate: ""
+    RankingUpdate: "",
   };
 
   // Update balance
-  RankingSubmit = e => {
+  RankingSubmit = (e) => {
     e.preventDefault();
 
     const { player, firestore, history } = this.props;
     const { RankingUpdate } = this.state;
 
     const playerUpdate = {
-      ranking: parseFloat(RankingUpdate)
+      ranking: parseFloat(RankingUpdate),
     };
 
     // Update in firestore
@@ -39,7 +39,7 @@ class PlayerDetails extends Component {
       .then(history.push("/"));
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     const { player } = this.props;
@@ -75,7 +75,14 @@ class PlayerDetails extends Component {
 
     if (player) {
       return (
-        <div style={{backgroundColor:"white",opacity:"0.8",padding:"10px",border:"10px white"}}>
+        <div
+          style={{
+            backgroundColor: "white",
+            opacity: "0.8",
+            padding: "10px",
+            border: "10px white",
+          }}
+        >
           <div className="row">
             <div className="col-md-6">
               <Link to="/" className="btn btn-link">
@@ -97,8 +104,9 @@ class PlayerDetails extends Component {
             </div>
           </div>
           <hr />
-          <div className="card" >
-            <h3 className="card-header" >
+
+          <div className="card">
+            <h3 className="card-header">
               {player.firstName} {player.lastName}
             </h3>
             <div className="card-body">
@@ -116,7 +124,7 @@ class PlayerDetails extends Component {
                     <span
                       className={classnames({
                         "text-danger": player.ranking > 5,
-                        "text-success": player.ranking < 5
+                        "text-success": player.ranking < 5,
                       })}
                     >
                       #{parseFloat(player.ranking)}
@@ -126,7 +134,7 @@ class PlayerDetails extends Component {
                         href="#!"
                         onClick={() =>
                           this.setState({
-                            showRankingUpdate: !this.state.showRankingUpdate
+                            showRankingUpdate: !this.state.showRankingUpdate,
                           })
                         }
                       >
@@ -158,18 +166,18 @@ class PlayerDetails extends Component {
 }
 
 PlayerDetails.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
 };
 
 export default compose(
-  firestoreConnect(props => [
+  firestoreConnect((props) => [
     {
       collection: "players",
       storeAs: "player",
-      doc: props.match.params.id
-    }
+      doc: props.match.params.id,
+    },
   ]),
   connect(({ firestore: { ordered } }, props) => ({
-    player: ordered.player && ordered.player[0]
+    player: ordered.player && ordered.player[0],
   }))
 )(PlayerDetails);

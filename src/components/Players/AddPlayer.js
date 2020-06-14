@@ -13,9 +13,9 @@ class AddPlayer extends Component {
     country: "",
     ranking: "",
     slamsWon: "",
-    url: ""
+    url: "",
   };
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const newPlayer = this.state;
@@ -27,14 +27,21 @@ class AddPlayer extends Component {
       .then(() => this.props.history.push("/"));
   };
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     const { disableBalanceOnAdd } = this.props.settings;
     return (
-      <div style={{backgroundColor:"white",opacity:"0.6",padding:"10px",border:"10px white"}}>
+      <div
+        style={{
+          backgroundColor: "white",
+          opacity: "0.6",
+          padding: "10px",
+          border: "10px white",
+        }}
+      >
         <div className="row">
           <div className="col-md-6">
             <Link to="/" className="btn-btn-link">
@@ -119,13 +126,14 @@ class AddPlayer extends Component {
                   name="url"
                   onChange={this.onChange}
                   value={this.state.url}
+                  disabled
                 />
               </div>
 
               <input
                 type="submit"
                 value="Submit"
-                className="btn btn-primary btn-block"
+                className="btn btn-success btn"
               />
             </form>
           </div>
@@ -136,12 +144,12 @@ class AddPlayer extends Component {
 }
 
 AddPlayer.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
 };
 
 export default compose(
   firestoreConnect(),
   connect((state, props) => ({
-    settings: state.settings
+    settings: state.settings,
   }))
 )(AddPlayer);

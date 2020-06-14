@@ -17,7 +17,7 @@ class EditPlayer extends Component {
     this.urlInput = React.createRef();
   }
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { player, firestore, history } = this.props;
@@ -28,7 +28,7 @@ class EditPlayer extends Component {
       lastName: this.lastNameInput.current.value,
 
       slamsWon: this.slamsWonInput.current.value,
-      url: this.urlInput.current.value
+      url: this.urlInput.current.value,
     };
 
     // Update player in firestore
@@ -43,7 +43,14 @@ class EditPlayer extends Component {
 
     if (player) {
       return (
-        <div style={{backgroundColor:"white",opacity:"0.6",padding:"10px",border:"10px white"}}>
+        <div
+          style={{
+            backgroundColor: "white",
+            opacity: "0.6",
+            padding: "10px",
+            border: "10px white",
+          }}
+        >
           <div className="row">
             <div className="col-md-6">
               <Link to="/" className="btn btn-link">
@@ -101,6 +108,7 @@ class EditPlayer extends Component {
                     required
                     ref={this.urlInput}
                     defaultValue={player.url}
+                    disabled
                   />
                 </div>
 
@@ -121,15 +129,15 @@ class EditPlayer extends Component {
 }
 
 EditPlayer.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
 };
 
 export default compose(
-  firestoreConnect(props => [
-    { collection: "players", storeAs: "player", doc: props.match.params.id }
+  firestoreConnect((props) => [
+    { collection: "players", storeAs: "player", doc: props.match.params.id },
   ]),
   connect(({ firestore: { ordered }, settings }, props) => ({
     player: ordered.player && ordered.player[0],
-    settings: settings
+    settings: settings,
   }))
 )(EditPlayer);
